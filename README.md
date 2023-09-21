@@ -1,6 +1,6 @@
 # Projeto 4: CRUD + Relatórios (Aluno, Professor e Curso)
 
-Questôes:
+Questões:
 1. Você acredita que a organização do código está boa? Justifique sua resposta:
 
 2. Existe código repetido que poderia ser convertido em funções para ser reutilizado? Se sim indique qual?
