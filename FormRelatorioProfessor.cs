@@ -59,7 +59,7 @@ namespace projeto4
         private PdfDocument doc = new PdfDocument();
         private void MontaRelatorio()
         {
-            //ativar as seguintes´propriedades:
+            //ativar as seguintes propriedades:
             //ALLOW USER TO ADD ROWS -> False
             //ALLOW USER TO DELETE ROWS -> False
             //SELECTION MODE -> FullRowSelect
