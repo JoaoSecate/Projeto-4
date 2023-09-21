@@ -1,6 +1,6 @@
 ﻿namespace projeto4
 {
-    partial class FormEelatorioAluno
+    partial class FormRelatorioAluno
     {
         /// <summary>
         /// Required designer variable.

@@ -78,7 +78,6 @@
             this.cboTipo.Size = new System.Drawing.Size(527, 49);
             this.cboTipo.StartIndex = 0;
             this.cboTipo.TabIndex = 1;
-            this.cboTipo.SelectedIndexChanged += new System.EventHandler(this.cboEstado_SelectedIndexChanged);
             // 
             // groupBox2
             // 

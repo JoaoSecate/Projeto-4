@@ -38,11 +38,6 @@ namespace projeto4
             }
         }
 
-        private void FormRelatorioProfessor_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void materialButton1_Click(object sender, EventArgs e)
         {
             MontaRelatorio();
@@ -126,7 +121,14 @@ namespace projeto4
 
             doc.LoadFromFile("RelatorioProfessores.pdf");
             doc.PrintSettings.PrinterName = cboImpressora.Text;
-            doc.Print();
+            if (doc.PrintSettings.PrinterName == "")
+            {
+                //TODO: Implementar mensagem de erro
+            }
+            else
+            {
+                doc.Print();
+            }
         }
     }
 }

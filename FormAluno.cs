@@ -22,16 +22,6 @@ namespace projeto4
             InitializeComponent();
         }
 
-        private void FormAluno_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMatricula_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private bool ValidarFormulario()
         {
             if (string.IsNullOrEmpty(txtMatricula.Text))
@@ -76,7 +66,6 @@ namespace projeto4
                 mmtbDtNascimento.Focus();
                 return false;
             }
-
             return true;
         }
         
@@ -94,8 +83,6 @@ namespace projeto4
                 {
                     ((MaterialMaskedTextBox)control).Clear();
                 }
-
-
             }
         }
 
@@ -126,12 +113,10 @@ namespace projeto4
             if (!isAlteracao)
             {
                 sql = "INSERT INTO aluno" + "(matricula, dt_nascimento, nome, endereco, bairro, cidade, estado, senha) VALUES (@matricula, @dt_nascimento, @nome, @endereco, @bairro, @cidade, @estado, @senha)";
-
             }
             else
             {
                 sql = "UPDATE aluno SET " + "matricula = @matricula," + "dt_nascimento = @dt_nascimento," + "nome = @nome," + "endereco = @endereco," + "bairro = @bairro," + "cidade = @cidade," + "estado = @estado," + "senha = @senha" + " WHERE id = @id";
-
             }
 
             var cmd = new MySqlCommand(sql, con);
@@ -162,7 +147,6 @@ namespace projeto4
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }
-
 
         private void Editar()
         {
@@ -228,7 +212,6 @@ namespace projeto4
                     Deletar(id);
                     CarregaGrid();
                 }
-
             }
             else
             {
@@ -246,6 +229,11 @@ namespace projeto4
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             CarregaGrid();
+        }
+
+        private void txtId_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

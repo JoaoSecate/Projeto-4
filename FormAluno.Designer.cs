@@ -122,6 +122,7 @@
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.TrailingIcon = null;
             this.txtId.UseSystemPasswordChar = false;
+            this.txtId.Click += new System.EventHandler(this.txtId_Click);
             // 
             // btnSalvar
             // 

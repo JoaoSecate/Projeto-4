@@ -23,9 +23,6 @@ namespace projeto4
             InitializeComponent();
         }
 
-
-
-
         private bool ValidarFormulario()
         {
             if (string.IsNullOrEmpty(txtNome.Text))
@@ -64,8 +61,6 @@ namespace projeto4
                 {
                     ((MaterialMaskedTextBox)control).Clear();
                 }
-
-
             }
         }
 
@@ -77,12 +72,10 @@ namespace projeto4
             if (!isAlteracao)
             {
                 sql = "INSERT INTO CURSO" + "(nome, tipo, ano_criado) VALUES (@nome, @tipo, @ano_criado)";
-
             }
             else
             {
                 sql = "UPDATE CURSO SET " + "nome = @nome," + "tipo = @tipo," + "ano_criado = @ano_criado" + " WHERE id = @id";
-
             }
 
             var cmd = new MySqlCommand(sql, con);
@@ -96,7 +89,6 @@ namespace projeto4
             cmd.ExecuteNonQuery();
             limpaCampos();
         }
-
 
         private void CarregaGrid()
         {
@@ -151,16 +143,6 @@ namespace projeto4
         {
             limpaCampos();
             txtNome.Focus();
-        }
-
-        private void txtId_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormCurso_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void btnSalvar_Click_1(object sender, EventArgs e)

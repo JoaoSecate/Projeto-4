@@ -19,13 +19,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace projeto4
 {
-    public partial class FormEelatorioAluno : MaterialForm
+    public partial class FormRelatorioAluno : MaterialForm
     {
-
+        private PdfDocument doc;
         bool isAlteracao = false;
         string cs = @"server=127.0.0.1;" + "uid=root;" + "pwd=;" + "database=academico";
 
-        public FormEelatorioAluno()
+        public FormRelatorioAluno()
         {
             InitializeComponent();
             CarregaImpressora();
@@ -52,7 +52,7 @@ namespace projeto4
             //Start("RelatorioAlunos.pdf");
         }
 
-        private PdfDocument doc = new PdfDocument();
+        
         private void MontaRelatorio()
         {
             //ativar as seguintes´propriedades:
@@ -83,7 +83,7 @@ namespace projeto4
             con.Close();
 
             //Inicio geracao PDF
-            //PdfDocument doc = new PdfDocument();
+            doc = new PdfDocument();
             PdfSection sec = doc.Sections.Add();
             sec.PageSettings.Width = PdfPageSize.A4.Width;
             PdfPageBase page = sec.Pages.Add();
@@ -99,7 +99,6 @@ namespace projeto4
             table.Style.BorderPen = new PdfPen(brush1, 0.75f);
             table.Style.HeaderStyle.StringFormat = new PdfStringFormat(PdfTextAlignment.Center);
             table.Style.HeaderSource = PdfHeaderSource.ColumnCaptions;
-            //table.Style.HeaderRowCount = 1;
             table.Style.ShowHeader = true;
             table.DataSource = dt;
             table.Style.HeaderStyle.BackgroundBrush = PdfBrushes.BlueViolet;
@@ -119,7 +118,14 @@ namespace projeto4
 
             doc.LoadFromFile("RelatorioAlunos.pdf");
             doc.PrintSettings.PrinterName = cboImpressora.Text;
-            doc.Print();
+            if(doc.PrintSettings.PrinterName == "")
+            {
+                //TODO: Implementar mensagem de erro
+            }
+            else
+            {
+                doc.Print();
+            }
         }
     }
 

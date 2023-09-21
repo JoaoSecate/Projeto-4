@@ -45,7 +45,7 @@ namespace projeto4
 
         private void relatóriosDeAlunosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormEelatorioAluno formEelatorioAluno = new FormEelatorioAluno();
+            FormRelatorioAluno formEelatorioAluno = new FormRelatorioAluno();
             formEelatorioAluno.MdiParent = this;
             formEelatorioAluno.Show();
         }

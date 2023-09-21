@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-
 namespace projeto4
 {
     public partial class FormRelatorioCurso : MaterialForm
@@ -39,11 +38,6 @@ namespace projeto4
             }
         }
 
-        private void FormRelatorioCurso_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void materialButton1_Click(object sender, EventArgs e)
         {
             MontaRelatorio();
@@ -54,7 +48,6 @@ namespace projeto4
                 UseShellExecute = true
             };
             p.Start();
-            //Start("RelatorioAlunos.pdf");
         }
 
         private PdfDocument doc = new PdfDocument();
@@ -120,7 +113,15 @@ namespace projeto4
 
             doc.LoadFromFile("RelatorioCursos.pdf");
             doc.PrintSettings.PrinterName = cboImpressora.Text;
-            doc.Print();
+            
+            if (doc.PrintSettings.PrinterName == "")
+            {
+                //TODO: Implementar mensagem de erro
+            }
+            else
+            {
+                doc.Print();
+            }
         }
 
         private void materialButton1_Click_1(object sender, EventArgs e)
@@ -133,11 +134,6 @@ namespace projeto4
                 UseShellExecute = true
             };
             p.Start();
-        }
-
-        private void cboEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

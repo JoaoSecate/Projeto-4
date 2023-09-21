@@ -228,7 +228,6 @@
             Controls.Add(groupBox1);
             Name = "FormRelatorioProfessor";
             Text = "Relatorio de Professor";
-            Load += FormRelatorioProfessor_Load;
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
