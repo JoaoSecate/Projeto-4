@@ -15,7 +15,9 @@ namespace projeto4
 {
     public partial class FormCurso : MaterialForm
     {
+        // Variável para controlar se estamos realizando uma alteração
         bool isAlteracao = false;
+        // String de conexão ao banco de dados MySQL
         string cs = @"server=127.0.0.1;" + "uid=root;" + "pwd=;" + "database=academico";
 
         public FormCurso()
@@ -23,20 +25,24 @@ namespace projeto4
             InitializeComponent();
         }
 
+        // Função para validar o formulário
         private bool ValidarFormulario()
         {
+            // Verifica se o campo Nome está preenchido
             if (string.IsNullOrEmpty(txtNome.Text))
             {
                 MessageBox.Show("Nome do curso é obrigatório", "IFSP", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
                 return false;
             }
+            // Verifica se o campo Ano de Criação está preenchido
             if (string.IsNullOrEmpty(txtAnoCriado.Text))
             {
                 MessageBox.Show("Ano de criação é obrigatório", "IFSP", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtAnoCriado.Focus();
                 return false;
             }
+            // Verifica se o campo Tipo de Curso está preenchido
             if (string.IsNullOrEmpty(cboTipo.Text))
             {
                 MessageBox.Show("Tipo do curso é obrigatório", "IFSP", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -47,11 +53,13 @@ namespace projeto4
             return true;
         }
 
+        // Função para limpar os campos do formulário
         private void limpaCampos()
         {
             isAlteracao = false;
 
-            foreach (var control in tabPage1.Controls) // vai percorrer todos os meus componentes da page 1
+            // Limpa todos os campos do formulário
+            foreach (var control in tabPage1.Controls)
             {
                 if (control is MaterialTextBoxEdit)
                 {
@@ -64,17 +72,20 @@ namespace projeto4
             }
         }
 
+        // Função para salvar os dados no banco de dados
         private void Salvar()
         {
             var con = new MySqlConnection(cs);
-            con.Open();//estou abrindo o banco e posso dar inssertion e etc
+            con.Open();
             var sql = "";
             if (!isAlteracao)
             {
+                // Se não for uma alteração, insere um novo registro na tabela CURSO
                 sql = "INSERT INTO CURSO" + "(nome, tipo, ano_criado) VALUES (@nome, @tipo, @ano_criado)";
             }
             else
             {
+                // Se for uma alteração, atualiza um registro existente na tabela CURSO
                 sql = "UPDATE CURSO SET " + "nome = @nome," + "tipo = @tipo," + "ano_criado = @ano_criado" + " WHERE id = @id";
             }
 
@@ -84,20 +95,15 @@ namespace projeto4
             cmd.Parameters.AddWithValue("@ano_criado", txtAnoCriado.Text);
 
             if (isAlteracao)
-                cmd.Parameters.AddWithValue("@id", txtId.Text);//ele é um auto incremento, então recebe o valor automáticamente depois da primeira vez
+                cmd.Parameters.AddWithValue("@id", txtId.Text);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
             limpaCampos();
         }
 
+        // Função para carregar os dados na grade
         private void CarregaGrid()
         {
-            //ativar as seguintes´propriedades:
-            //ALLOW USER TO ADD ROWS -> False
-            //ALLOW USER TO DELETE ROWS -> False
-            //SELECTION MODE -> FullRowSelect
-            //MULTISELECT -> False
-            //READY ONLY -> True
             var con = new MySqlConnection(cs);
             con.Open();
             var sql = "SELECT * FROM CURSO";
@@ -106,9 +112,9 @@ namespace projeto4
             var dt = new DataTable();
             sqlAd.Fill(dt);
             dataGridView1.DataSource = dt;
-
         }
 
+        // Função para deletar um registro da tabela CURSO
         private void Deletar(int id)
         {
             var con = new MySqlConnection(cs);
@@ -120,6 +126,7 @@ namespace projeto4
             cmd.ExecuteNonQuery();
         }
 
+        // Função para editar um registro existente
         private void Editar()
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -139,36 +146,41 @@ namespace projeto4
             }
         }
 
+        // Evento de clique no botão "Cancelar"
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             limpaCampos();
             txtNome.Focus();
         }
 
+        // Evento de clique no botão "Salvar"
         private void btnSalvar_Click_1(object sender, EventArgs e)
         {
             {
                 if (ValidarFormulario())
                 {
                     Salvar();
-                    materialTabControl1.SelectedIndex = 1;//é para mover o tabcontrol 
+                    materialTabControl1.SelectedIndex = 1;
                 }
             }
         }
 
+        // Evento de clique na aba "Listagem"
         private void tabPage2_Click(object sender, EventArgs e)
         {
             CarregaGrid();
         }
 
+        // Evento de clique no botão "Editar"
         private void btnEditar_Click_1(object sender, EventArgs e)
         {
             Editar();
         }
 
+        // Evento de clique no botão "Excluir"
         private void btnExcluir_Click_1(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)//verifica se selecionou alguma linha
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 if (MessageBox.Show("Deseja realmente deletar?", "IFSP", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -184,6 +196,7 @@ namespace projeto4
             }
         }
 
+        // Evento de clique no botão "Novo"
         private void btnNovo_Click_1(object sender, EventArgs e)
         {
             limpaCampos();
@@ -191,6 +204,7 @@ namespace projeto4
             txtNome.Focus();
         }
 
+        // Evento de entrada na aba "Listagem"
         private void tabPage2_Enter(object sender, EventArgs e)
         {
             CarregaGrid();

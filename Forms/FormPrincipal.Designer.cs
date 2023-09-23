@@ -1,6 +1,6 @@
 ﻿namespace projeto4
 {
-    partial class Principal
+    partial class FormPrincipal
     {
         /// <summary>
         ///  Required designer variable.
@@ -112,7 +112,7 @@
             relatóriosToolStripMenuItem1.Text = "Relatórios de Cursos";
             relatóriosToolStripMenuItem1.Click += relatóriosToolStripMenuItem1_Click;
             // 
-            // Principal
+            // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -122,11 +122,10 @@
             Controls.Add(menuStrip1);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
-            Name = "Principal";
+            Name = "FormPrincipal";
             Text = "IFSP - Sistema de Gerênciamento Acadêmico";
             WindowState = FormWindowState.Maximized;
             FormClosing += Principal_FormClosing;
-            Load += Principal_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
